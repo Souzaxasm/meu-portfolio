@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Arthur Souza Mendes</title>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Bricolage+Grotesque:wght@400;500;700;800&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #f5f2eb;
+      --paper: #faf8f3;
+      --ink: #1a1a18;
+      --muted: #7a7568;
+      --accent: #d4541a;
+      --accent-light: #f5e6dc;
+      --border: #ddd9ce;
+      --mono: 'IBM Plex Mono', monospace;
+      --sans: 'Bricolage Grotesque', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--sans);
+      line-height: 1.6;
+    }
+
+    /* NAV */
+    nav {
+      padding: 1.2rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--border);
+      background: var(--bg);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    .nav-name {
+      font-family: var(--mono);
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+    .nav-links { display: flex; gap: 1.5rem; }
+    .nav-links a {
+      font-size: 0.9rem;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--accent); }
+
+    /* HERO */
+    .hero {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 5rem 2rem 4rem;
+    }
+    .hero-eyebrow {
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      color: var(--accent);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .hero-eyebrow::before {
+      content: '';
+      display: block;
+      width: 24px;
+      height: 1px;
+      background: var(--accent);
+    }
+    .hero h1 {
+      font-size: clamp(2.8rem, 7vw, 5rem);
+      font-weight: 800;
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      margin-bottom: 1.5rem;
+    }
+    .hero h1 em {
+      font-style: normal;
+      color: var(--accent);
+    }
+    .hero-bio {
+      font-size: 1.05rem;
+      color: var(--muted);
+      max-width: 520px;
+      margin-bottom: 2.5rem;
+      line-height: 1.75;
+    }
+    .hero-bio strong { color: var(--ink); font-weight: 500; }
+    .hero-links { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .link-pill {
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      padding: 0.55rem 1.2rem;
+      border-radius: 100px;
+      text-decoration: none;
+      transition: all 0.2s;
+      letter-spacing: 0.04em;
+    }
+    .link-pill.solid {
+      background: var(--ink);
+      color: var(--bg);
+    }
+    .link-pill.solid:hover { background: var(--accent); }
+    .link-pill.ghost {
+      border: 1px solid var(--border);
+      color: var(--ink);
+      background: var(--paper);
+    }
+    .link-pill.ghost:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* DIVIDER */
+    .divider {
+      max-width: 780px;
+      margin: 0 auto;
+      border: none;
+      border-top: 1px solid var(--border);
+    }
+
+    /* SECTIONS */
+    section {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 4rem 2rem;
+    }
+    .section-label {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      margin-bottom: 2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .section-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* SOBRE */
+    .sobre-text {
+      font-size: 1.05rem;
+      line-height: 1.8;
+      color: var(--muted);
+      max-width: 600px;
+    }
+    .sobre-text strong { color: var(--ink); font-weight: 500; }
+
+    /* PROJETOS */
+    .projetos-list { display: flex; flex-direction: column; gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+    .projeto-item {
+      background: var(--paper);
+      padding: 1.6rem 1.8rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 1rem;
+      transition: background 0.2s;
+    }
+    .projeto-item:hover { background: var(--accent-light); }
+    .projeto-info { flex: 1; }
+    .projeto-titulo {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 0.3rem;
+      letter-spacing: -0.01em;
+    }
+    .projeto-desc {
+      font-size: 0.88rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+    .projeto-tags { display: flex; gap: 0.4rem; flex-wrap: wrap; margin-top: 0.8rem; }
+    .projeto-tag {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      color: var(--muted);
+      background: var(--bg);
+      border: 1px solid var(--border);
+      padding: 0.2rem 0.55rem;
+      border-radius: 4px;
+    }
+    .projeto-arrow {
+      font-size: 1.1rem;
+      color: var(--border);
+      transition: color 0.2s;
+      margin-top: 2px;
+    }
+    .projeto-item:hover .projeto-arrow { color: var(--accent); }
+
+    /* SKILLS */
+    .skills-wrap { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .skill-badge {
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      padding: 0.45rem 1rem;
+      border-radius: 6px;
+      background: var(--paper);
+      border: 1px solid var(--border);
+      color: var(--ink);
+      transition: all 0.2s;
+    }
+    .skill-badge:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* CONTATO */
+    .contato-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1rem; }
+    .contato-item {
+      background: var(--paper);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.4rem;
+      text-decoration: none;
+      color: var(--ink);
+      transition: all 0.2s;
+    }
+    .contato-item:hover { border-color: var(--accent); transform: translateY(-2px); }
+    .contato-label { font-family: var(--mono); font-size: 0.65rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.4rem; }
+    .contato-valor { font-size: 0.92rem; font-weight: 600; }
+
+    /* FOOTER */
+    footer {
+      text-align: center;
+      padding: 2.5rem 2rem;
+      border-top: 1px solid var(--border);
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      color: var(--muted);
+    }
+
+    @media (max-width: 600px) {
+      .nav-links { display: none; }
+      .projeto-item { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <span class="nav-name">arthur.sm</span>
+    <div class="nav-links">
+      <a href="#sobre">sobre</a>
+      <a href="#projetos">projetos</a>
+      <a href="#contato">contato</a>
+    </div>
+  </nav>
+
+  <div class="hero">
+    <p class="hero-eyebrow">estudante de computação</p>
+    <h1>Oi, eu sou o<br/><em>Arthur Souza.</em></h1>
+    <p class="hero-bio">
+      Estou no começo da minha jornada em <strong>Ciências da Computação</strong> e esse repositório é onde guardo o que estou aprendendo — desde os primeiros projetos web até os desafios da faculdade. Ainda tem muito pra crescer, mas é por aqui que começa.
+    </p>
+    <div class="hero-links">
+      <a href="https://github.com/Souzaxasm" target="_blank" class="link-pill solid">GitHub</a>
+      <a href="https://www.linkedin.com/in/arthur-souza-93b2a138a/" target="_blank" class="link-pill ghost">LinkedIn →</a>
+    </div>
+  </div>
+
+  <hr class="divider"/>
+
+  <section id="sobre">
+    <p class="section-label">sobre mim</p>
+    <p class="sobre-text">
+      Curso <strong>Ciências da Computação</strong> e comecei a estudar desenvolvimento web por conta própria além da grade da faculdade. Estou aprendendo <strong>HTML, CSS e Git</strong> no momento, e quero ir avançando pra JavaScript e além. Criei esse portfólio como parte de um desafio acadêmico, mas também pra ter um lugar de verdade pra mostrar o que estou construindo.
+    </p>
+  </section>
+
+  <hr class="divider"/>
+
+  <section id="projetos">
+    <p class="section-label">projetos</p>
+    <div class="projetos-list">
+
+      <div class="projeto-item">
+        <div class="projeto-info">
+          <p class="projeto-titulo">Portfólio Pessoal</p>
+          <p class="projeto-desc">Minha primeira página web feita do zero com HTML e CSS. Publicada pelo GitHub Pages como parte de um desafio de versionamento da faculdade.</p>
+          <div class="projeto-tags">
+            <span class="projeto-tag">HTML</span>
+            <span class="projeto-tag">CSS</span>
+            <span class="projeto-tag">GitHub Pages</span>
+          </div>
+        </div>
+        <span class="projeto-arrow">↗</span>
+      </div>
+
+      <div class="projeto-item">
+        <div class="projeto-info">
+          <p class="projeto-titulo">Desafio Git & GitHub</p>
+          <p class="projeto-desc">Repositório criado para praticar versionamento com Git, organização de pastas e documentação com README.md.</p>
+          <div class="projeto-tags">
+            <span class="projeto-tag">Git</span>
+            <span class="projeto-tag">GitHub</span>
+            <span class="projeto-tag">Markdown</span>
+          </div>
+        </div>
+        <span class="projeto-arrow">↗</span>
+      </div>
+
+      <div class="projeto-item">
+        <div class="projeto-info">
+          <p class="projeto-titulo">Em breve...</p>
+          <p class="projeto-desc">Ainda estou estudando e o próximo projeto tá chegando. Acompanha lá no GitHub.</p>
+          <div class="projeto-tags">
+            <span class="projeto-tag">🔜</span>
+          </div>
+        </div>
+        <span class="projeto-arrow">—</span>
+      </div>
+
+    </div>
+  </section>
+
+  <hr class="divider"/>
+
+  <section id="skills">
+    <p class="section-label">o que estou aprendendo</p>
+    <div class="skills-wrap">
+      <span class="skill-badge">HTML5</span>
+      <span class="skill-badge">CSS3</span>
+      <span class="skill-badge">Git</span>
+      <span class="skill-badge">GitHub</span>
+      <span class="skill-badge">Markdown</span>
+      <span class="skill-badge">GitHub Pages</span>
+      <span class="skill-badge">JavaScript (em breve)</span>
+    </div>
+  </section>
+
+  <hr class="divider"/>
+
+  <section id="contato">
+    <p class="section-label">contato</p>
+    <div class="contato-grid">
+      <a href="https://github.com/Souzaxasm" target="_blank" class="contato-item">
+        <p class="contato-label">GitHub</p>
+        <p class="contato-valor">Souzaxasm</p>
+      </a>
+      <a href="https://www.linkedin.com/in/arthur-souza-93b2a138a/" target="_blank" class="contato-item">
+        <p class="contato-label">LinkedIn</p>
+        <p class="contato-valor">Souzaxasm</p>
+      </a>
+      <a href="mailto:arthursouzamendes751@gmail.com" class="contato-item">
+        <p class="contato-label">E-mail</p>
+        <p class="contato-valor">arthursouzamendes751<br/>@gmail.com</p>
+      </a>
+    </div>
+  </section>
+
+  <footer>
+    feito por arthur souza · 2026
+  </footer>
+
+</body>
+</html>
